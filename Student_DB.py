@@ -1,24 +1,23 @@
 import sqlite3
+
 conn=sqlite3.connect("student_database.db")
 cursor=conn.cursor()
 
 cursor.execute(''' 
-       CREATE TABLE student 
-(
-               id INT PRIMARY KEY,
-               name VARCHAR(50),
-               age INT NOT NULL,
-               marks INT NOT NULL
-               
+       CREATE TABLE IF NOT EXISTS student (
+           id INTEGER PRIMARY KEY,
+           name TEXT NOT NULL,
+           age INTEGER,
+           marks REAL
                
      )
 ''')
 student_data = [
-    ("khushal", 23, 85),
-    ("harshita", 24, 75),
-    ("tanishq", 25, 95),
-    ("shubham", 22, 77),
-    ("Golu", 21, 67)
+    ("khushal", 23, 85.5),
+    ("harshita", 24, 75.7),
+    ("tanishq", 25, 95.8),
+    ("shubham", 22, 77.5),
+    ("Golu", 21, 67.6)
 ]
 
 cursor.executemany("INSERT INTO student (name, age, marks) VALUES (?, ?, ?)",student_data)
